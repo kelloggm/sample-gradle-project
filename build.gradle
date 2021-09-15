@@ -14,10 +14,10 @@ plugins {
     id 'application'
 
     // lombok
-    id 'io.freefair.lombok' version '3.7.5'
+    id 'io.freefair.lombok' version '5.3.3.3'
 
     // Checker Framework build logic
-    id 'org.checkerframework' version '0.3.12-SNAPSHOT' apply false
+    id 'org.checkerframework' version '0.6.0'
 }
 
 repositories {
@@ -27,27 +27,15 @@ repositories {
     jcenter()
 }
 
-if (!project.hasProperty("useCheckerFramework")) {
-    ext.useCheckerFramework = "false"
-}
+apply plugin: 'org.checkerframework'
 
-if ("true".equals(project.ext.useCheckerFramework)) {
-    apply plugin: 'org.checkerframework'
-    
-    dependencies {
-        implementation 'org.checkerframework:typesafe-builder:0.1-SNAPSHOT'
-        implementation 'org.checkerframework:returnsrcvr-checker:0.1-SNAPSHOT'
-
-        checkerFramework 'org.checkerframework:typesafe-builder:0.1-SNAPSHOT'
-        checkerFramework 'org.checkerframework:returnsrcvr-checker:0.1-SNAPSHOT'
-        
-        //checkerFramework 'org.checkerframework:checker:2.9.0'
-        implementation 'org.checkerframework:checker-qual:2.9.0'
-    }
-    
-    checkerFramework {
-        checkers = ['org.checkerframework.checker.builder.TypesafeBuilderChecker']
-    }
+checkerFramework {
+    checkers = [
+            'org.checkerframework.checker.nullness.NullnessChecker'
+    ]
+    extraJavacArgs = [
+            '-AsuppressWarnings=initialization'
+    ]
 }
 
 dependencies {
