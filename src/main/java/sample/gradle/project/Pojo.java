@@ -1,9 +1,7 @@
 package sample.gradle.project;
 
-import lombok.Builder;
-import lombok.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
-@Builder
 public class Pojo {
-    private @NonNull String foo;
+    public @NonNull String foo;
 }
