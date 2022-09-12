@@ -13,7 +13,7 @@ public class App {
     }
 
     public static @NonNull Object foo() {
-        return null;
+        return new Object();
     }
 
     public static void main(String[] args) {

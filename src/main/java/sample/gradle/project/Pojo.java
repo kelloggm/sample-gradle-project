@@ -4,8 +4,9 @@ import org.checkerframework.checker.index.qual.NonNegative;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class Pojo {
-    private @NonNull String foo;
+    private @NonNull String foo = "henlo11";
 
+    @SuppressWarnings("nullness")
     public static void main(String[] args) {
         System.out.println(args[1]);
         returnNN();

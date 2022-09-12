@@ -14,33 +14,39 @@ plugins {
     id 'application'
 
     // Checker Framework build logic
-    id 'org.checkerframework' version '0.5.18-SNAPSHOT'
+    id 'org.checkerframework' version '0.6.16'
 }
 
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    mavenLocal()
-    jcenter()
+    mavenCentral()
 }
 
 apply plugin: 'org.checkerframework'
 
 checkerFramework {
     checkers = ['org.checkerframework.checker.nullness.NullnessChecker']
+    skipVersionCheck = true
 }
 
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-        vendor = JvmVendorSpec.ADOPTOPENJDK
-    }
-}
+//java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(8)
+//        vendor = JvmVendorSpec.ADOPTOPENJDK
+//    }
+//}
+
+def checkerFrameworkVersion = '3.25.0'
 
 dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    compileOnly("org.checkerframework:checker-qual:$checkerFrameworkVersion")
+    testCompileOnly("org.checkerframework:checker-qual:$checkerFrameworkVersion")
+    implementation("org.checkerframework:checker-util:$checkerFrameworkVersion")
+    checkerFramework("org.checkerframework:checker:$checkerFrameworkVersion")
 }
 
 // Define the main class for the application
